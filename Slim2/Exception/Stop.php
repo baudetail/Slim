@@ -30,20 +30,18 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-namespace Slim\Exception;
+namespace Slim2\Exception;
 
 /**
- * Pass Exception
+ * Stop Exception
  *
- * This Exception will cause the Router::dispatch method
- * to skip the current matching route and continue to the next
- * matching route. If no subsequent routes are found, a
- * HTTP 404 Not Found response will be sent to the client.
+ * This Exception is thrown when the Slim application needs to abort
+ * processing and return control flow to the outer PHP script.
  *
  * @package Slim
  * @author  Josh Lockhart
  * @since   1.0.0
  */
-class Pass extends \Exception
+class Stop extends \Exception
 {
 }

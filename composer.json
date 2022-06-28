@@ -1,7 +1,7 @@
 {
     "name": "baudetail/slim",
     "type": "library",
-    "description": "Slim Framework, a PHP micro framework",
+    "description": "Slim2 Framework, a PHP micro framework",
     "keywords": ["microframework","rest","router"],
     "homepage": "http://github.com/codeguy/Slim",
     "license": "MIT",
@@ -20,6 +20,6 @@
         "phpseclib/mcrypt_compat": "Polyfil for mcrypt extension"
     },
     "autoload": {
-        "psr-0": { "Slim": "." }
+        "psr-0": { "Slim2": "." }
     }
 }

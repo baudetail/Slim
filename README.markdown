@@ -39,8 +39,9 @@ You need **PHP >= 5.3.0**. If you use encrypted cookies, you'll also need the `m
 ### Hello World Tutorial
 
 Instantiate a Slim application:
+
 ```php
-$app = new \Slim\Slim();
+$app = new \Slim2\Slim();
 ```
 Define a HTTP GET route:
 ```php

@@ -30,7 +30,7 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-class MyMiddleware extends \Slim\Middleware
+class MyMiddleware extends \Slim2\Middleware
 {
     public function call() {}
 }

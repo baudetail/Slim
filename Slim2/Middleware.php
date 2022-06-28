@@ -30,7 +30,7 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-namespace Slim;
+namespace Slim2;
 
 /**
  * Middleware
@@ -42,7 +42,7 @@ namespace Slim;
 abstract class Middleware
 {
     /**
-     * @var \Slim\Slim Reference to the primary application instance
+     * @var \Slim2\Slim Reference to the primary application instance
      */
     protected $app;
 
@@ -57,7 +57,7 @@ abstract class Middleware
      * This method injects the primary Slim application instance into
      * this middleware.
      *
-     * @param  \Slim\Slim $application
+     * @param  \Slim2\Slim $application
      */
     final public function setApplication($application)
     {
@@ -70,7 +70,7 @@ abstract class Middleware
      * This method retrieves the application previously injected
      * into this middleware.
      *
-     * @return \Slim\Slim
+     * @return \Slim2\Slim
      */
     final public function getApplication()
     {
@@ -84,7 +84,7 @@ abstract class Middleware
      * this middleware so that it may optionally be called
      * when appropriate.
      *
-     * @param \Slim|\Slim\Middleware
+     * @param \Slim|\Slim2\Middleware
      */
     final public function setNextMiddleware($nextMiddleware)
     {
@@ -97,7 +97,7 @@ abstract class Middleware
      * This method retrieves the next downstream middleware
      * previously injected into this middleware.
      *
-     * @return \Slim\Slim|\Slim\Middleware
+     * @return \Slim2\Slim|\Slim2\Middleware
      */
     final public function getNextMiddleware()
     {

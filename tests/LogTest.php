@@ -44,7 +44,7 @@ class LogTest extends PHPUnit_Framework_TestCase
 {
     public function testEnabled()
     {
-        $log = new \Slim\Log(new MyWriter());
+        $log = new \Slim2\Log(new MyWriter());
         $this->assertTrue($log->isEnabled()); //<-- Default case
         $log->setEnabled(true);
         $this->assertTrue($log->isEnabled());
@@ -54,133 +54,133 @@ class LogTest extends PHPUnit_Framework_TestCase
 
     public function testGetLevel()
     {
-        $log = new \Slim\Log(new MyWriter());
-        $this->assertEquals(\Slim\Log::DEBUG, $log->getLevel());
+        $log = new \Slim2\Log(new MyWriter());
+        $this->assertEquals(\Slim2\Log::DEBUG, $log->getLevel());
     }
 
     public function testSetLevel()
     {
-        $log = new \Slim\Log(new MyWriter());
-        $log->setLevel(\Slim\Log::WARN);
-        $this->assertEquals(\Slim\Log::WARN, $log->getLevel());
+        $log = new \Slim2\Log(new MyWriter());
+        $log->setLevel(\Slim2\Log::WARN);
+        $this->assertEquals(\Slim2\Log::WARN, $log->getLevel());
     }
 
     public function testSetInvalidLevel()
     {
         $this->setExpectedException('InvalidArgumentException');
-        $log = new \Slim\Log(new MyWriter());
-        $log->setLevel(\Slim\Log::DEBUG + 1);
+        $log = new \Slim2\Log(new MyWriter());
+        $log->setLevel(\Slim2\Log::DEBUG + 1);
     }
 
     public function testLogDebug()
     {
         $this->expectOutputString('Debug');
-        $log = new \Slim\Log(new MyWriter());
+        $log = new \Slim2\Log(new MyWriter());
         $result = $log->debug('Debug');
         $this->assertTrue($result);
     }
 
     public function testLogDebugExcludedByLevel()
     {
-        $log = new \Slim\Log(new MyWriter());
-        $log->setLevel(\Slim\Log::INFO);
+        $log = new \Slim2\Log(new MyWriter());
+        $log->setLevel(\Slim2\Log::INFO);
         $this->assertFalse($log->debug('Debug'));
     }
 
     public function testLogInfo()
     {
         $this->expectOutputString('Info');
-        $log = new \Slim\Log(new MyWriter());
+        $log = new \Slim2\Log(new MyWriter());
         $result = $log->info('Info');
         $this->assertTrue($result);
     }
 
     public function testLogInfoExcludedByLevel()
     {
-        $log = new \Slim\Log(new MyWriter());
-        $log->setLevel(\Slim\Log::NOTICE);
+        $log = new \Slim2\Log(new MyWriter());
+        $log->setLevel(\Slim2\Log::NOTICE);
         $this->assertFalse($log->info('Info'));
     }
 
     public function testLogNotice()
     {
         $this->expectOutputString('Notice');
-        $log = new \Slim\Log(new MyWriter());
+        $log = new \Slim2\Log(new MyWriter());
         $result = $log->notice('Notice');
         $this->assertTrue($result);
     }
 
     public function testLogNoticeExcludedByLevel()
     {
-        $log = new \Slim\Log(new MyWriter());
-        $log->setLevel(\Slim\Log::WARN);
+        $log = new \Slim2\Log(new MyWriter());
+        $log->setLevel(\Slim2\Log::WARN);
         $this->assertFalse($log->info('Info'));
     }
 
     public function testLogWarn()
     {
         $this->expectOutputString('Warn');
-        $log = new \Slim\Log(new MyWriter());
+        $log = new \Slim2\Log(new MyWriter());
         $result = $log->warning('Warn');
         $this->assertTrue($result);
     }
 
     public function testLogWarnExcludedByLevel()
     {
-        $log = new \Slim\Log(new MyWriter());
-        $log->setLevel(\Slim\Log::ERROR);
+        $log = new \Slim2\Log(new MyWriter());
+        $log->setLevel(\Slim2\Log::ERROR);
         $this->assertFalse($log->warning('Warn'));
     }
 
     public function testLogError()
     {
         $this->expectOutputString('Error');
-        $log = new \Slim\Log(new MyWriter());
+        $log = new \Slim2\Log(new MyWriter());
         $result = $log->error('Error');
         $this->assertTrue($result);
     }
 
     public function testLogErrorExcludedByLevel()
     {
-        $log = new \Slim\Log(new MyWriter());
-        $log->setLevel(\Slim\Log::CRITICAL);
+        $log = new \Slim2\Log(new MyWriter());
+        $log->setLevel(\Slim2\Log::CRITICAL);
         $this->assertFalse($log->error('Error'));
     }
 
     public function testLogCritical()
     {
         $this->expectOutputString('Critical');
-        $log = new \Slim\Log(new MyWriter());
+        $log = new \Slim2\Log(new MyWriter());
         $result = $log->critical('Critical');
         $this->assertTrue($result);
     }
 
     public function testLogCriticalExcludedByLevel()
     {
-        $log = new \Slim\Log(new MyWriter());
-        $log->setLevel(\Slim\Log::ALERT);
+        $log = new \Slim2\Log(new MyWriter());
+        $log->setLevel(\Slim2\Log::ALERT);
         $this->assertFalse($log->critical('Critical'));
     }
 
     public function testLogAlert()
     {
         $this->expectOutputString('Alert');
-        $log = new \Slim\Log(new MyWriter());
+        $log = new \Slim2\Log(new MyWriter());
         $result = $log->alert('Alert');
         $this->assertTrue($result);
     }
 
     public function testLogAlertExcludedByLevel()
     {
-        $log = new \Slim\Log(new MyWriter());
-        $log->setLevel(\Slim\Log::EMERGENCY);
+        $log = new \Slim2\Log(new MyWriter());
+        $log->setLevel(\Slim2\Log::EMERGENCY);
         $this->assertFalse($log->alert('Alert'));
     }
 
     public function testLogEmergency()
     {
         $this->expectOutputString('Emergency');
-        $log = new \Slim\Log(new MyWriter());
+        $log = new \Slim2\Log(new MyWriter());
         $result = $log->emergency('Emergency');
         $this->assertTrue($result);
     }
@@ -188,7 +188,7 @@ class LogTest extends PHPUnit_Framework_TestCase
     public function testInterpolateMessage()
     {
         $this->expectOutputString('Hello Slim !');
-        $log = new \Slim\Log(new MyWriter());
+        $log = new \Slim2\Log(new MyWriter());
         $result = $log->debug(
             'Hello {framework} !',
             array('framework' => "Slim")
@@ -200,7 +200,7 @@ class LogTest extends PHPUnit_Framework_TestCase
     {
         $writer1 = new MyWriter();
         $writer2 = new MyWriter();
-        $log = new \Slim\Log($writer1);
+        $log = new \Slim2\Log($writer1);
         $this->assertSame($writer1, $log->getWriter());
         $log->setWriter($writer2);
         $this->assertSame($writer2, $log->getWriter());

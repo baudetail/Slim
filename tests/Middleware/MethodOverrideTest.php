@@ -41,7 +41,7 @@ class CustomAppMethod
 
     public function __construct()
     {
-        $this->environment = \Slim\Environment::getInstance();
+        $this->environment = \Slim2\Environment::getInstance();
     }
 
     public function &environment() {
@@ -61,14 +61,14 @@ class MethodOverrideTest extends PHPUnit_Framework_TestCase
      */
     public function testOverrideMethodAsPost()
     {
-        \Slim\Environment::mock(array(
+        \Slim2\Environment::mock(array(
             'REQUEST_METHOD' => 'POST',
             'CONTENT_TYPE' => 'application/x-www-form-urlencoded',
             'CONTENT_LENGTH' => 11,
             'slim.input' => '_METHOD=PUT'
         ));
         $app = new CustomAppMethod();
-        $mw = new \Slim\Middleware\MethodOverride();
+        $mw = new \Slim2\Middleware\MethodOverride();
         $mw->setApplication($app);
         $mw->setNextMiddleware($app);
         $mw->call();
@@ -83,12 +83,12 @@ class MethodOverrideTest extends PHPUnit_Framework_TestCase
      */
     public function testDoesNotOverrideMethodIfNotPost()
     {
-        \Slim\Environment::mock(array(
+        \Slim2\Environment::mock(array(
             'REQUEST_METHOD' => 'GET',
             'slim.input' => ''
         ));
         $app = new CustomAppMethod();
-        $mw = new \Slim\Middleware\MethodOverride();
+        $mw = new \Slim2\Middleware\MethodOverride();
         $mw->setApplication($app);
         $mw->setNextMiddleware($app);
         $mw->call();
@@ -102,7 +102,7 @@ class MethodOverrideTest extends PHPUnit_Framework_TestCase
      */
     public function testDoesNotOverrideMethodAsPostWithoutParameter()
     {
-        \Slim\Environment::mock(array(
+        \Slim2\Environment::mock(array(
             'REQUEST_METHOD' => 'POST',
             'REMOTE_ADDR' => '127.0.0.1',
             'SCRIPT_NAME' => '/foo/index.php', //<-- Physical
@@ -115,7 +115,7 @@ class MethodOverrideTest extends PHPUnit_Framework_TestCase
             'slim.errors' => fopen('php://stderr', 'w')
         ));
         $app = new CustomAppMethod();
-        $mw = new \Slim\Middleware\MethodOverride();
+        $mw = new \Slim2\Middleware\MethodOverride();
         $mw->setApplication($app);
         $mw->setNextMiddleware($app);
         $mw->call();
@@ -129,7 +129,7 @@ class MethodOverrideTest extends PHPUnit_Framework_TestCase
      */
     public function testOverrideMethodAsHeader()
     {
-        \Slim\Environment::mock(array(
+        \Slim2\Environment::mock(array(
             'REQUEST_METHOD' => 'POST',
             'CONTENT_TYPE' => 'application/json',
             'CONTENT_LENGTH' => 0,
@@ -137,7 +137,7 @@ class MethodOverrideTest extends PHPUnit_Framework_TestCase
             'HTTP_X_HTTP_METHOD_OVERRIDE' => 'DELETE'
         ));
         $app = new CustomAppMethod();
-        $mw = new \Slim\Middleware\MethodOverride();
+        $mw = new \Slim2\Middleware\MethodOverride();
         $mw->setApplication($app);
         $mw->setNextMiddleware($app);
         $mw->call();

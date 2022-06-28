@@ -7,9 +7,9 @@
  *
  * If you are using Composer, you can skip this step.
  */
-require 'Slim/Slim.php';
+require 'Slim2/Slim.php';
 
-\Slim\Slim::registerAutoloader();
+\Slim2\Slim::registerAutoloader();
 
 /**
  * Step 2: Instantiate a Slim application
@@ -19,7 +19,7 @@ require 'Slim/Slim.php';
  * your Slim application now by passing an associative array
  * of setting names and values into the application constructor.
  */
-$app = new \Slim\Slim();
+$app = new \Slim2\Slim();
 
 /**
  * Step 3: Define the Slim application routes

@@ -34,7 +34,7 @@ class ResponseTest extends PHPUnit_Framework_TestCase
 {
     public function testConstructWithoutArgs()
     {
-        $res = new \Slim\Http\Response();
+        $res = new \Slim2\Http\Response();
 
         $this->assertAttributeEquals(200, 'status', $res);
         $this->assertAttributeEquals('', 'body', $res);
@@ -42,7 +42,7 @@ class ResponseTest extends PHPUnit_Framework_TestCase
 
     public function testConstructWithArgs()
     {
-        $res = new \Slim\Http\Response('Foo', 201);
+        $res = new \Slim2\Http\Response('Foo', 201);
 
         $this->assertAttributeEquals(201, 'status', $res);
         $this->assertAttributeEquals('Foo', 'body', $res);
@@ -50,14 +50,14 @@ class ResponseTest extends PHPUnit_Framework_TestCase
 
     public function testGetStatus()
     {
-        $res = new \Slim\Http\Response();
+        $res = new \Slim2\Http\Response();
 
         $this->assertEquals(200, $res->getStatus());
     }
 
     public function testSetStatus()
     {
-        $res = new \Slim\Http\Response();
+        $res = new \Slim2\Http\Response();
         $res->setStatus(301);
 
         $this->assertAttributeEquals(301, 'status', $res);
@@ -68,7 +68,7 @@ class ResponseTest extends PHPUnit_Framework_TestCase
      */
     public function testStatusGetOld()
     {
-        $res = new \Slim\Http\Response('', 201);
+        $res = new \Slim2\Http\Response('', 201);
         $this->assertEquals(201, $res->status());
     }
 
@@ -77,7 +77,7 @@ class ResponseTest extends PHPUnit_Framework_TestCase
      */
     public function testStatusSetOld()
     {
-        $res = new \Slim\Http\Response();
+        $res = new \Slim2\Http\Response();
         $prop = new \ReflectionProperty($res, 'status');
         $prop->setAccessible(true);
         $res->status(301);
@@ -87,7 +87,7 @@ class ResponseTest extends PHPUnit_Framework_TestCase
 
     public function testGetBody()
     {
-        $res = new \Slim\Http\Response();
+        $res = new \Slim2\Http\Response();
         $property = new \ReflectionProperty($res, 'body');
         $property->setAccessible(true);
         $property->setValue($res, 'foo');
@@ -97,7 +97,7 @@ class ResponseTest extends PHPUnit_Framework_TestCase
 
     public function testSetBody()
     {
-        $res = new \Slim\Http\Response('bar');
+        $res = new \Slim2\Http\Response('bar');
         $res->setBody('foo'); // <-- Should replace body
 
         $this->assertAttributeEquals('foo', 'body', $res);
@@ -105,7 +105,7 @@ class ResponseTest extends PHPUnit_Framework_TestCase
 
     public function testWrite()
     {
-        $res = new \Slim\Http\Response();
+        $res = new \Slim2\Http\Response();
         $property = new \ReflectionProperty($res, 'body');
         $property->setAccessible(true);
         $property->setValue($res, 'foo');
@@ -116,14 +116,14 @@ class ResponseTest extends PHPUnit_Framework_TestCase
 
     public function testLength()
     {
-        $res = new \Slim\Http\Response('foo'); // <-- Sets body and length
+        $res = new \Slim2\Http\Response('foo'); // <-- Sets body and length
 
         $this->assertEquals(3, $res->getLength());
     }
 
     public function testFinalize()
     {
-        $res = new \Slim\Http\Response();
+        $res = new \Slim2\Http\Response();
         $resFinal = $res->finalize();
 
         $this->assertTrue(is_array($resFinal));
@@ -135,7 +135,7 @@ class ResponseTest extends PHPUnit_Framework_TestCase
 
     public function testFinalizeWithEmptyBody()
     {
-        $res = new \Slim\Http\Response('Foo', 304);
+        $res = new \Slim2\Http\Response('Foo', 304);
         $resFinal = $res->finalize();
 
         $this->assertEquals('', $resFinal[2]);
@@ -143,7 +143,7 @@ class ResponseTest extends PHPUnit_Framework_TestCase
 
     public function testRedirect()
     {
-        $res = new \Slim\Http\Response();
+        $res = new \Slim2\Http\Response();
         $res->redirect('/foo');
 
         $pStatus = new \ReflectionProperty($res, 'status');
@@ -155,8 +155,8 @@ class ResponseTest extends PHPUnit_Framework_TestCase
 
     public function testIsEmpty()
     {
-        $r1 = new \Slim\Http\Response();
-        $r2 = new \Slim\Http\Response();
+        $r1 = new \Slim2\Http\Response();
+        $r2 = new \Slim2\Http\Response();
         $r1->setStatus(404);
         $r2->setStatus(201);
         $this->assertFalse($r1->isEmpty());
@@ -165,8 +165,8 @@ class ResponseTest extends PHPUnit_Framework_TestCase
 
     public function testIsClientError()
     {
-        $r1 = new \Slim\Http\Response();
-        $r2 = new \Slim\Http\Response();
+        $r1 = new \Slim2\Http\Response();
+        $r2 = new \Slim2\Http\Response();
         $r1->setStatus(404);
         $r2->setStatus(500);
         $this->assertTrue($r1->isClientError());
@@ -175,8 +175,8 @@ class ResponseTest extends PHPUnit_Framework_TestCase
 
     public function testIsForbidden()
     {
-        $r1 = new \Slim\Http\Response();
-        $r2 = new \Slim\Http\Response();
+        $r1 = new \Slim2\Http\Response();
+        $r2 = new \Slim2\Http\Response();
         $r1->setStatus(403);
         $r2->setStatus(500);
         $this->assertTrue($r1->isForbidden());
@@ -185,8 +185,8 @@ class ResponseTest extends PHPUnit_Framework_TestCase
 
     public function testIsInformational()
     {
-        $r1 = new \Slim\Http\Response();
-        $r2 = new \Slim\Http\Response();
+        $r1 = new \Slim2\Http\Response();
+        $r2 = new \Slim2\Http\Response();
         $r1->setStatus(100);
         $r2->setStatus(200);
         $this->assertTrue($r1->isInformational());
@@ -195,8 +195,8 @@ class ResponseTest extends PHPUnit_Framework_TestCase
 
     public function testIsNotFound()
     {
-        $r1 = new \Slim\Http\Response();
-        $r2 = new \Slim\Http\Response();
+        $r1 = new \Slim2\Http\Response();
+        $r2 = new \Slim2\Http\Response();
         $r1->setStatus(404);
         $r2->setStatus(200);
         $this->assertTrue($r1->isNotFound());
@@ -205,8 +205,8 @@ class ResponseTest extends PHPUnit_Framework_TestCase
 
     public function testIsOk()
     {
-        $r1 = new \Slim\Http\Response();
-        $r2 = new \Slim\Http\Response();
+        $r1 = new \Slim2\Http\Response();
+        $r2 = new \Slim2\Http\Response();
         $r1->setStatus(200);
         $r2->setStatus(201);
         $this->assertTrue($r1->isOk());
@@ -215,9 +215,9 @@ class ResponseTest extends PHPUnit_Framework_TestCase
 
     public function testIsSuccessful()
     {
-        $r1 = new \Slim\Http\Response();
-        $r2 = new \Slim\Http\Response();
-        $r3 = new \Slim\Http\Response();
+        $r1 = new \Slim2\Http\Response();
+        $r2 = new \Slim2\Http\Response();
+        $r3 = new \Slim2\Http\Response();
         $r1->setStatus(200);
         $r2->setStatus(201);
         $r3->setStatus(302);
@@ -228,8 +228,8 @@ class ResponseTest extends PHPUnit_Framework_TestCase
 
     public function testIsRedirect()
     {
-        $r1 = new \Slim\Http\Response();
-        $r2 = new \Slim\Http\Response();
+        $r1 = new \Slim2\Http\Response();
+        $r2 = new \Slim2\Http\Response();
         $r1->setStatus(307);
         $r2->setStatus(304);
         $this->assertTrue($r1->isRedirect());
@@ -238,9 +238,9 @@ class ResponseTest extends PHPUnit_Framework_TestCase
 
     public function testIsRedirection()
     {
-        $r1 = new \Slim\Http\Response();
-        $r2 = new \Slim\Http\Response();
-        $r3 = new \Slim\Http\Response();
+        $r1 = new \Slim2\Http\Response();
+        $r2 = new \Slim2\Http\Response();
+        $r3 = new \Slim2\Http\Response();
         $r1->setStatus(307);
         $r2->setStatus(304);
         $r3->setStatus(200);
@@ -251,8 +251,8 @@ class ResponseTest extends PHPUnit_Framework_TestCase
 
     public function testIsServerError()
     {
-        $r1 = new \Slim\Http\Response();
-        $r2 = new \Slim\Http\Response();
+        $r1 = new \Slim2\Http\Response();
+        $r2 = new \Slim2\Http\Response();
         $r1->setStatus(500);
         $r2->setStatus(400);
         $this->assertTrue($r1->isServerError());
@@ -261,11 +261,11 @@ class ResponseTest extends PHPUnit_Framework_TestCase
 
     public function testMessageForCode()
     {
-        $this->assertEquals('200 OK', \Slim\Http\Response::getMessageForCode(200));
+        $this->assertEquals('200 OK', \Slim2\Http\Response::getMessageForCode(200));
     }
 
     public function testMessageForCodeWithInvalidCode()
     {
-        $this->assertNull(\Slim\Http\Response::getMessageForCode(600));
+        $this->assertNull(\Slim2\Http\Response::getMessageForCode(600));
     }
 }

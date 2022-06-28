@@ -37,7 +37,7 @@ class SetTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->bag = new \Slim\Helper\Set();
+        $this->bag = new \Slim2\Helper\Set();
         $this->property = new \ReflectionProperty($this->bag, 'data');
         $this->property->setAccessible(true);
     }

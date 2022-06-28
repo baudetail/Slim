@@ -30,7 +30,7 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-namespace Slim\Http;
+namespace Slim2\Http;
 
 /**
  * Slim HTTP Request
@@ -60,31 +60,31 @@ class Request
 
     /**
      * Application Environment
-     * @var \Slim\Environment
+     * @var \Slim2\Environment
      */
     protected $env;
 
     /**
      * HTTP Headers
-     * @var \Slim\Http\Headers
+     * @var \Slim2\Http\Headers
      */
     public $headers;
 
     /**
      * HTTP Cookies
-     * @var \Slim\Helper\Set
+     * @var \Slim2\Helper\Set
      */
     public $cookies;
 
     /**
      * Constructor
-     * @param \Slim\Environment $env
+     * @param \Slim2\Environment $env
      */
-    public function __construct(\Slim\Environment $env)
+    public function __construct(\Slim2\Environment $env)
     {
         $this->env = $env;
-        $this->headers = new \Slim\Http\Headers(\Slim\Http\Headers::extract($env));
-        $this->cookies = new \Slim\Helper\Set(\Slim\Http\Util::parseCookieHeader($env['HTTP_COOKIE']));
+        $this->headers = new \Slim2\Http\Headers(\Slim2\Http\Headers::extract($env));
+        $this->cookies = new \Slim2\Helper\Set(\Slim2\Http\Util::parseCookieHeader($env['HTTP_COOKIE']));
     }
 
     /**
@@ -278,7 +278,7 @@ class Request
     }
 
     /**
-     * Fetch PUT data (alias for \Slim\Http\Request::post)
+     * Fetch PUT data (alias for \Slim2\Http\Request::post)
      * @param  string           $key
      * @param  mixed            $default Default return value when key does not exist
      * @return array|mixed|null
@@ -289,7 +289,7 @@ class Request
     }
 
     /**
-     * Fetch PATCH data (alias for \Slim\Http\Request::post)
+     * Fetch PATCH data (alias for \Slim2\Http\Request::post)
      * @param  string           $key
      * @param  mixed            $default Default return value when key does not exist
      * @return array|mixed|null
@@ -300,7 +300,7 @@ class Request
     }
 
     /**
-     * Fetch DELETE data (alias for \Slim\Http\Request::post)
+     * Fetch DELETE data (alias for \Slim2\Http\Request::post)
      * @param  string           $key
      * @param  mixed            $default Default return value when key does not exist
      * @return array|mixed|null

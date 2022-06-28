@@ -47,14 +47,14 @@ class ContentTypesTest extends PHPUnit_Framework_TestCase
      */
     public function testParsesJson()
     {
-        \Slim\Environment::mock(array(
+        \Slim2\Environment::mock(array(
             'REQUEST_METHOD' => 'POST',
             'CONTENT_TYPE' => 'application/json',
             'CONENT_LENGTH' => 13,
             'slim.input' => '{"foo":"bar"}'
         ));
-        $s = new \Slim\Slim();
-        $s->add(new \Slim\Middleware\ContentTypes());
+        $s = new \Slim2\Slim();
+        $s->add(new \Slim2\Middleware\ContentTypes());
         $s->run();
         $body = $s->request()->getBody();
         $this->assertTrue(is_array($body));
@@ -66,14 +66,14 @@ class ContentTypesTest extends PHPUnit_Framework_TestCase
      */
     public function testParsesJsonWithError()
     {
-        \Slim\Environment::mock(array(
+        \Slim2\Environment::mock(array(
             'REQUEST_METHOD' => 'POST',
             'CONTENT_TYPE' => 'application/json',
             'CONENT_LENGTH' => 12,
             'slim.input' => '{"foo":"bar"' //<-- This should be incorrect!
         ));
-        $s = new \Slim\Slim();
-        $s->add(new \Slim\Middleware\ContentTypes());
+        $s = new \Slim2\Slim();
+        $s->add(new \Slim2\Middleware\ContentTypes());
         $s->run();
         $body = $s->request()->getBody();
         $this->assertTrue(is_string($body));
@@ -85,14 +85,14 @@ class ContentTypesTest extends PHPUnit_Framework_TestCase
      */
     public function testParsesXml()
     {
-        \Slim\Environment::mock(array(
+        \Slim2\Environment::mock(array(
             'REQUEST_METHOD' => 'POST',
             'CONTENT_TYPE' => 'application/xml',
             'CONENT_LENGTH' => 68,
             'slim.input' => '<books><book><id>1</id><author>Clive Cussler</author></book></books>'
         ));
-        $s = new \Slim\Slim();
-        $s->add(new \Slim\Middleware\ContentTypes());
+        $s = new \Slim2\Slim();
+        $s->add(new \Slim2\Middleware\ContentTypes());
         $s->run();
         $body = $s->request()->getBody();
         $this->assertInstanceOf('SimpleXMLElement', $body);
@@ -105,14 +105,14 @@ class ContentTypesTest extends PHPUnit_Framework_TestCase
     public function testParsesXmlWithError()
     {
 	libxml_use_internal_errors(true);
-        \Slim\Environment::mock(array(
+        \Slim2\Environment::mock(array(
             'REQUEST_METHOD' => 'POST',
             'CONTENT_TYPE' => 'application/xml',
             'CONTENT_LENGTH' => 68,
             'slim.input' => '<books><book><id>1</id><author>Clive Cussler</book></books>' //<-- This should be incorrect!
         ));
-        $s = new \Slim\Slim();
-        $s->add(new \Slim\Middleware\ContentTypes());
+        $s = new \Slim2\Slim();
+        $s->add(new \Slim2\Middleware\ContentTypes());
         $s->run();
         $body = $s->request()->getBody();
         $this->assertTrue(is_string($body));
@@ -124,14 +124,14 @@ class ContentTypesTest extends PHPUnit_Framework_TestCase
      */
     public function testParsesCsv()
     {
-        \Slim\Environment::mock(array(
+        \Slim2\Environment::mock(array(
             'REQUEST_METHOD' => 'POST',
             'CONTENT_TYPE' => 'text/csv',
             'CONTENT_LENGTH' => 44,
             'slim.input' => "John,Doe,000-111-2222\nJane,Doe,111-222-3333"
         ));
-        $s = new \Slim\Slim();
-        $s->add(new \Slim\Middleware\ContentTypes());
+        $s = new \Slim2\Slim();
+        $s->add(new \Slim2\Middleware\ContentTypes());
         $s->run();
         $body = $s->request()->getBody();
         $this->assertTrue(is_array($body));
@@ -146,14 +146,14 @@ class ContentTypesTest extends PHPUnit_Framework_TestCase
      */
     public function testParsesRequestBodyWithMediaType()
     {
-        \Slim\Environment::mock(array(
+        \Slim2\Environment::mock(array(
             'REQUEST_METHOD' => 'POST',
             'CONTENT_TYPE' => 'application/json; charset=ISO-8859-4',
             'CONTENT_LENGTH' => 13,
             'slim.input' => '{"foo":"bar"}'
         ));
-        $s = new \Slim\Slim();
-        $s->add(new \Slim\Middleware\ContentTypes());
+        $s = new \Slim2\Slim();
+        $s->add(new \Slim2\Middleware\ContentTypes());
         $s->run();
         $body = $s->request()->getBody();
         $this->assertTrue(is_array($body));

@@ -45,7 +45,7 @@ class SlimFlashTest extends PHPUnit_Framework_TestCase
      */
     public function testSetFlashForNextRequest()
     {
-        $f = new \Slim\Middleware\Flash();
+        $f = new \Slim2\Middleware\Flash();
         $f->set('foo', 'bar');
         $f->save();
         $this->assertEquals('bar', $_SESSION['slim.flash']['foo']);
@@ -56,7 +56,7 @@ class SlimFlashTest extends PHPUnit_Framework_TestCase
      */
     public function testSetFlashForCurrentRequest()
     {
-        $f = new \Slim\Middleware\Flash();
+        $f = new \Slim2\Middleware\Flash();
         $f->now('foo', 'bar');
         $this->assertEquals('bar', $f['foo']);
     }
@@ -67,7 +67,7 @@ class SlimFlashTest extends PHPUnit_Framework_TestCase
     public function testLoadsFlashFromPreviousRequest()
     {
         $_SESSION['slim.flash'] = array('info' => 'foo');
-        $f = new \Slim\Middleware\Flash();
+        $f = new \Slim2\Middleware\Flash();
         $f->loadMessages();
         $this->assertEquals('foo', $f['info']);
     }
@@ -78,7 +78,7 @@ class SlimFlashTest extends PHPUnit_Framework_TestCase
     public function testKeepFlashFromPreviousRequest()
     {
         $_SESSION['slim.flash'] = array('info' => 'foo');
-        $f = new \Slim\Middleware\Flash();
+        $f = new \Slim2\Middleware\Flash();
         $f->loadMessages();
         $f->keep();
         $f->save();
@@ -91,7 +91,7 @@ class SlimFlashTest extends PHPUnit_Framework_TestCase
     public function testFlashMessagesFromPreviousRequestDoNotPersist()
     {
         $_SESSION['slim.flash'] = array('info' => 'foo');
-        $f = new \Slim\Middleware\Flash();
+        $f = new \Slim2\Middleware\Flash();
         $f->save();
         $this->assertEmpty($_SESSION['slim.flash']);
     }
@@ -102,7 +102,7 @@ class SlimFlashTest extends PHPUnit_Framework_TestCase
     public function testFlashArrayAccess()
     {
         $_SESSION['slim.flash'] = array('info' => 'foo');
-        $f = new \Slim\Middleware\Flash();
+        $f = new \Slim2\Middleware\Flash();
         $f['info'] = 'bar';
         $f->save();
         $this->assertTrue(isset($f['info']));
@@ -117,7 +117,7 @@ class SlimFlashTest extends PHPUnit_Framework_TestCase
     public function testIteration()
     {
         $_SESSION['slim.flash'] = array('info' => 'foo', 'error' => 'bar');
-        $f = new \Slim\Middleware\Flash();
+        $f = new \Slim2\Middleware\Flash();
         $f->loadMessages();
         $output = '';
         foreach ($f as $key => $value) {
@@ -132,7 +132,7 @@ class SlimFlashTest extends PHPUnit_Framework_TestCase
     public function testCountable()
     {
         $_SESSION['slim.flash'] = array('info' => 'foo', 'error' => 'bar');
-        $f = new \Slim\MiddleWare\Flash();
+        $f = new \Slim2\MiddleWare\Flash();
         $f->loadMessages();
         $this->assertEquals(2, count($f));
     }
